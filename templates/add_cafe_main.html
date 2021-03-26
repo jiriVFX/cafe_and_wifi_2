@@ -1,0 +1,29 @@
+      {% import "bootstrap/wtf.html" as wtf %}
+      <main>
+        <!-- Add Café -->
+        <section id="cafes" class="bg-lightgrey">
+          <div class="container-fluid text-left">
+            <div class="col-lg-6 col-md-12">
+              <h1>Add new Café</h1>
+              <p class="text-secondary">Know a good café?<br />
+                You can add it here, just enter few important details.
+              </p>
+<!--              <form method="POST" action="{{ url_for('add_cafe') }}">-->
+<!--                {{ form.csrf_token }}-->
+<!--                <p>{{ form.name.label }} <br> {{ form.name(size=30) }}</p>-->
+<!--                <p>{{ form.map_url.label }} <br> {{ form.map_url }}</p>-->
+<!--                <p>{{ form.img_url.label }} <br> {{ form.img_url }}</p>-->
+<!--                <p>{{ form.location.label }} <br> {{ form.location }}</p>-->
+<!--                <p>{{ form.seats.label }} <br> {{ form.seats }}</p>-->
+<!--                <p>{{ form.coffee_price.label }} <br> {{ form.coffee_price }}</p>-->
+<!--                <p>{{ form.has_sockets.label }} <br> {{ form.has_sockets }}</p>-->
+<!--                <p>{{ form.has_toilet.label }} <br> {{ form.has_toilet }}</p>-->
+<!--                <p>{{ form.has_wifi.label }} <br> {{ form.has_wifi }}</p>-->
+<!--                <p>{{ form.can_take_calls.label }} <br> {{ form.can_take_calls }}</p>-->
+<!--                {{ form.submit }}-->
+<!--              </form>-->
+              {{ wtf.quick_form(form, novalidate=True, method="post", button_map={"add_cafe": "primary"}) }}
+            </div>
+          </div>
+        </section>
+      </main>

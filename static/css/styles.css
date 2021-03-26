@@ -1,0 +1,237 @@
+/* General background colours*/
+.bg-lightblue {
+  background-color: #0062EB;
+}
+
+/* Modified Bootstrap button normal */
+.btn, #submit {
+  color: #0062EB;
+  background-color: #f8f9fa;
+  font-size: inherit;
+  border-radius: 100px;
+  border-width: 3px;
+  border-color: #0062EB;
+  margin: 1rem 0;
+  padding: 0.5rem 2.5rem;
+}
+
+.btn:hover, #submit:hover{
+  color: #f8f9fa;
+  background-color: #0062EB;
+  font-size: inherit;
+  border-radius: 100px;
+  border-width: 3px;
+  border-color: #0062EB;
+  padding: 0.5rem 2.5rem;
+}
+
+/* Modified button on blue background */
+.bg-lightblue .btn {
+  color: #f8f9fa;
+  background-color: #0062EB;
+  font-size: inherit;
+  border-radius: 100px;
+  border-width: 3px;
+  border-color: #f8f9fa;
+  margin: 1rem 0;
+  padding: 0.5rem 2.5rem;
+}
+
+.bg-lightblue .btn:hover {
+  color: #0062EB;
+  background-color: #f8f9fa;
+  font-size: inherit;
+  border-radius: 100px;
+  border-width: 3px;
+  border-color: #f8f9fa;
+  padding: 0.5rem 2.5rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+/*h1 styling*/
+h1 {
+  font-weight: bold;
+}
+
+/*h2 styling*/
+h2 {
+  font-weight: bold;
+}
+
+/*h3 styling*/
+h3 {
+  font-weight: bold;
+}
+
+/*padding so content does not go under the fixed navbar*/
+/* Body */
+body {
+  background: #f8f9fa;
+  /* For fixed-top navbar */
+  padding-top: 4rem;
+}
+
+.container-fluid {
+    padding: 0 10%;
+}
+
+body, .navbar-brand {
+  font-size: 1.5rem;
+}
+
+/* Navbar */
+.navbar {
+  padding: 1rem 0;
+}
+
+.nav-item {
+  margin-left: 1.5rem;
+}
+
+nav a{
+  color: #f8f9fa;
+}
+
+nav a:hover{
+  color: #f8f9fa;
+  border-bottom: 3px solid #f8f9fa;
+}
+
+.nav-link.active{
+  border-bottom: 3px solid #f8f9fa;
+}
+
+/* Main content */
+main a {
+  color: inherit;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+main a:hover{
+  color: #0062eb;
+}
+
+section {
+  padding: 6rem 0;
+}
+
+section h1 {
+  font-size: 3.5rem;
+}
+
+.wrapper {
+  margin-bottom: 2rem;
+}
+
+#intro {
+  padding-bottom: 20%;
+}
+
+#intro img, #about img {
+  border-radius: 25%;
+}
+
+#about img {
+  width: 67%;
+}
+
+#intro img {
+  width: 25%;
+  height: auto;
+}
+
+/* Forms */
+label {
+  margin-top: 1rem;
+}
+
+form #submit {
+    margin-top: 3rem;
+}
+
+/* Cafes */
+.search-form {
+  margin: 2rem 0;
+}
+
+#cafes img {
+  width: 80%;
+  height: auto;
+  border-radius: 10%;
+}
+
+@media all and (width <= 992px) {
+  #cafes h2 {
+    margin-top: 2rem;
+  }
+}
+
+#cafes .row {
+  margin-bottom: 3rem;
+}
+
+#cafes h1 {
+  margin-bottom: 6rem;
+}
+
+#cafes ul li {
+  background: #f8f9fa;
+}
+
+#cafes hr {
+    margin: 3rem 0;
+}
+
+
+/* right columns */
+ .right {
+   margin-left: 2.5rem;
+ }
+
+ .left {
+   margin-right: 2.5rem;
+ }
+
+/* Footer */
+
+footer {
+  padding: 6rem 0 2rem 0;
+}
+
+footer ul li {
+  display: inline;
+}
+
+footer .left {
+  text-align: left;
+}
+
+footer .right {
+  text-align: right;
+}
+
+footer .left li {
+  font-size: 3rem;
+  margin-right: 2.5rem;
+}
+
+footer .center {
+  text-align: center;
+}
+
+footer .center li {
+  font-size: 3rem;
+  margin-right: 2.5rem;
+}
+
+footer .right li {
+  margin-left: auto;
+}
+
+small {
+  margin-top: 2.5rem;
+}

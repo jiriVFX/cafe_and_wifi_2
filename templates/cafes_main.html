@@ -1,0 +1,78 @@
+      <main>
+        <!-- Intro Section -->
+        <section id="cafes" class="bg-lightgrey">
+          <div class="container-fluid text-left">
+            <div class="row">
+              <div class="col-lg-12 col-md-12">
+                <h1>Search cafés to work from!</h1>
+                <p class="text-secondary">Find the best cafés to work from around London</p>
+
+                <form class="search-form" method="GET" action="{{ url_for('search_cafes') }}">
+                  <input class="form-control" type="search" name="loc" placeholder="Search for cafés..." aria-label="Search for cafés">
+                  <button class="btn" type="submit">Search</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- Search Results -->
+          {% if cafes %}
+          <div class="container-fluid text-left">
+            <div class="col-lg-12 col-md-12 wrapper">
+              <h1>Cafés in {{ location }}</h1>
+            </div>
+
+            {% for cafe in cafes %}
+            <div class="row">
+              <div class="col-lg-4 col-md-12">
+                <a href="{{ cafe.map_url }}" target="_blank"><img src="{{ cafe.img_url }}"/></a>
+              </div>
+              <div class="col-lg-4 col-md-12">
+                <a href="{{ cafe.map_url }}" target="_blank"><h2>{{ cafe.name }}</h2></a>
+                <span>{{ cafe.location }}</span>
+                <p><a href="{{ cafe.map_url }}" target="_blank"><span class="fas fa-map-marked-alt"></span> Google Maps</a></p>
+              </div>
+              <div class="col-lg-4 col-md-12">
+                <h2>Features: </h2>
+                <ul class="list-group list-group-flush">
+                  {% if cafe.has_wifi %}
+                  <li class="list-group-item"><span class="fas fa-wifi"></span> Wi-Fi</li>
+                  {% endif %}
+                  {% if cafe.has_sockets %}
+                  <li class="list-group-item"><span class="fas fa-plug"></span> Sockets</li>
+                  {% endif %}
+                  {% if cafe.has_toilet %}
+                  <li class="list-group-item"><span class="fas fa-toilet"></span> Toilet</li>
+                  {% endif %}
+                  {% if cafe.can_take_calls %}
+                  <li class="list-group-item"><span class="fas fa-phone"></span> Take calls</li>
+                  {% endif %}
+                  <li class="list-group-item"><span class="fas fa-chair"></span> Seats: {{ cafe.seats }}</li>
+                  <li class="list-group-item"><span class="fas fa-coffee"></span> Coffee price: {{ cafe.coffee_price }}</li>
+                </ul>
+              </div>
+            </div>
+            <hr />
+            {% endfor %}
+          </div>
+          {% endif %}
+          <!-- If no cafe was found in the location -->
+          {% if notfound %}
+          <div class="container-fluid text-left">
+            <div class="col-lg-12 col-md-12">
+              <h2>Sorry, no cafés found in {{ location }}</h2>
+              <p class="text-secondary">Try to be more specific or search a different location.</p>
+            </div>
+          </div>
+          {% endif %}
+        </section>
+
+        <section id="contact" class="bg-orange">
+          <div class="container-fluid text-left">
+            <div>
+              <h1>Add Café / Report Closed Café</h1>
+              <p class="mb-5 text-secondary">Would you like to talk about a project? Do you have questions?</p>
+              <a class="btn" href="{{ url_for('add_cafe') }}" role="button">Add new Café</a>
+            </div>
+          </div>
+        </section>
+      </main>
