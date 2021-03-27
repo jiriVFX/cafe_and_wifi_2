@@ -95,19 +95,38 @@ def search_cafes():
 def add_cafe():
     add_cafe_form = AddCafeForm()
     user_agent = request.headers.get("User-Agent")
+
     if request.method == 'POST':
-        has_toilet = request.form.get("has_toilet", False)
+        # Convert checkbox default values of "y" and None into boolean values
+        # If request was made through API, values will be "1" or "0"
+        if request.form.get("has_toilet") == "y" or request.form.get("has_toilet") == "1":
+            has_toilet = True
+        else:
+            has_toilet = False
+        if request.form.get("has_wifi") == "y" or request.form.get("has_wifi") == "1":
+            has_wifi = True
+        else:
+            has_wifi = False
+        if request.form.get("has_sockets") == "y" or request.form.get("has_sockets") == "1":
+            has_sockets = True
+        else:
+            has_sockets = False
+        if request.form.get("can_take_calls") == "y" or request.form.get("has_sockets") == "1":
+            can_take_calls = True
+        else:
+            can_take_calls = False
+
         new_cafe = Cafe(
             name=request.form["name"],
             map_url=request.form["map_url"],
             img_url=request.form["img_url"],
             location=request.form["location"],
             seats=request.form["seats"],
-            has_toilet=bool(request.form.get("has_toilet", False)),
-            has_wifi=bool(request.form.get("has_wifi")),
-            has_sockets=bool(request.form.get("has_sockets")),
-            can_take_calls=bool(request.form.get("can_take_calls")),
-            coffee_price=bool(str(request.form["coffee_price"]))
+            has_toilet=has_toilet,
+            has_wifi=has_wifi,
+            has_sockets=has_sockets,
+            can_take_calls=can_take_calls,
+            coffee_price=str(request.form["coffee_price"])
         )
         # Add the new cafe to the database
         db.session.add(new_cafe)

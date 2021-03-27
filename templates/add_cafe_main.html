@@ -22,7 +22,7 @@
 <!--                <p>{{ form.can_take_calls.label }} <br> {{ form.can_take_calls }}</p>-->
 <!--                {{ form.submit }}-->
 <!--              </form>-->
-              {{ wtf.quick_form(form, novalidate=True, method="post", button_map={"add_cafe": "primary"}) }}
+              {{ wtf.quick_form(form, novalidate=False, method="post", button_map={"add_cafe": "primary"}) }}
             </div>
           </div>
         </section>
