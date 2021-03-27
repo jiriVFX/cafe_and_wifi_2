@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, flash, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 import random
@@ -95,45 +95,55 @@ def search_cafes():
 def add_cafe():
     add_cafe_form = AddCafeForm()
     user_agent = request.headers.get("User-Agent")
+    # Remove all previous flash messages
+    session.pop('_flashes', None)
 
     if request.method == 'POST':
-        # Convert checkbox default values of "y" and None into boolean values
-        # If request was made through API, values will be "1" or "0"
-        if request.form.get("has_toilet") == "y" or request.form.get("has_toilet") == "1":
-            has_toilet = True
-        else:
-            has_toilet = False
-        if request.form.get("has_wifi") == "y" or request.form.get("has_wifi") == "1":
-            has_wifi = True
-        else:
-            has_wifi = False
-        if request.form.get("has_sockets") == "y" or request.form.get("has_sockets") == "1":
-            has_sockets = True
-        else:
-            has_sockets = False
-        if request.form.get("can_take_calls") == "y" or request.form.get("has_sockets") == "1":
-            can_take_calls = True
-        else:
-            can_take_calls = False
+        name = request.form["name"]
 
-        new_cafe = Cafe(
-            name=request.form["name"],
-            map_url=request.form["map_url"],
-            img_url=request.form["img_url"],
-            location=request.form["location"],
-            seats=request.form["seats"],
-            has_toilet=has_toilet,
-            has_wifi=has_wifi,
-            has_sockets=has_sockets,
-            can_take_calls=can_take_calls,
-            coffee_price=str(request.form["coffee_price"])
-        )
-        # Add the new cafe to the database
-        db.session.add(new_cafe)
-        # Commit the changes
-        db.session.commit()
+        # if cafe with entered name is already in database
+        if Cafe.query.filter_by(name=name).first():
+            flash("Café with this name is already in the database.")
+            return render_template("add_cafe.html", form=add_cafe_form)
+        else:
+            # Convert checkbox default values of "y" and None into boolean values
+            # If request was made through API, values will be "1" or "0"
+            if request.form.get("has_toilet") == "y" or request.form.get("has_toilet") == "1":
+                has_toilet = True
+            else:
+                has_toilet = False
+            if request.form.get("has_wifi") == "y" or request.form.get("has_wifi") == "1":
+                has_wifi = True
+            else:
+                has_wifi = False
+            if request.form.get("has_sockets") == "y" or request.form.get("has_sockets") == "1":
+                has_sockets = True
+            else:
+                has_sockets = False
+            if request.form.get("can_take_calls") == "y" or request.form.get("has_sockets") == "1":
+                can_take_calls = True
+            else:
+                can_take_calls = False
+
+            new_cafe = Cafe(
+                name=name,
+                map_url=request.form["map_url"],
+                img_url=request.form["img_url"],
+                location=request.form["location"],
+                seats=request.form["seats"],
+                has_toilet=has_toilet,
+                has_wifi=has_wifi,
+                has_sockets=has_sockets,
+                can_take_calls=can_take_calls,
+                coffee_price=str(request.form["coffee_price"])
+            )
+            # Add the new cafe to the database
+            db.session.add(new_cafe)
+            # Commit the changes
+            db.session.commit()
         if user_agent:
-            return render_template("add_cafe.html", form=add_cafe_form, success="Café successfully added!")
+            flash("Café successfully added to the database.")
+            return render_template("add_cafe.html", form=add_cafe_form)
         else:
             return jsonify(response={"success": "Successfully added the new cafe."})
     else:
