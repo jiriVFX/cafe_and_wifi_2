@@ -143,6 +143,17 @@ def add_cafe():
             db.session.commit()
         if user_agent:
             flash("Café successfully added to the database.")
+            # Flash messages don't work on redirect, so we don't redirect, but empty the form
+            add_cafe_form.name.data = ""
+            add_cafe_form.map_url.data = ""
+            add_cafe_form.img_url.data = ""
+            add_cafe_form.location.data = ""
+            add_cafe_form.seats.data = ""
+            add_cafe_form.has_toilet.data = None
+            add_cafe_form.has_wifi.data = None
+            add_cafe_form.has_sockets.data = None
+            add_cafe_form.can_take_calls.data = None
+            add_cafe_form.coffee_price.data = None
             return render_template("add_cafe.html", form=add_cafe_form)
         else:
             return jsonify(response={"success": "Successfully added the new cafe."})
