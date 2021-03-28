@@ -4,7 +4,6 @@ from flask_bootstrap import Bootstrap
 import random
 import os
 from forms import AddCafeForm
-from distutils.util import strtobool
 
 app = Flask(__name__)
 Bootstrap(app)
