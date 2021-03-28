@@ -21,7 +21,7 @@
               <h1>Cafés in {{ location }}</h1>
             </div>
 
-            {% for cafe in cafes %}
+            {% for cafe in cafes.items %}
             <div class="row">
               <div class="col-lg-4 col-md-12">
                 <a href="{{ cafe.map_url }}" target="_blank"><img src="{{ cafe.img_url }}"/></a>
@@ -52,6 +52,15 @@
               </div>
             </div>
             <hr />
+            {% endfor %}
+            {% for page in cafes.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+              {% if page %}
+                {% if cafes.page == page %}
+                  <a id="active" class="btn" href="{{ url_for('home', page=page) }}" role="button">{{ page }}</a>
+                {% else %}
+                  <a class="btn" href="{{ url_for('home', page=page) }}" role="button">{{ page }}</a>
+                {% endif %}
+              {% endif %}
             {% endfor %}
           </div>
           {% endif %}

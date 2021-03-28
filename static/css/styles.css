@@ -29,21 +29,34 @@
 .bg-lightblue .btn {
   color: #f8f9fa;
   background-color: #0062EB;
-  font-size: inherit;
   border-radius: 100px;
   border-width: 3px;
   border-color: #f8f9fa;
+  font-size: inherit;
+  font-weight: normal;
   margin: 1rem 0;
   padding: 0.5rem 2.5rem;
 }
 
+#active {
+  background-color: #0062EB;
+  border-color: #0062EB;
+  color: #f8f9fa;
+}
+
+/*#active:hover {
+  background-color: #f8f9fa;
+  border-color: #0062EB;
+  color: #0062EB;
+}*/
+
 .bg-lightblue .btn:hover {
   color: #0062EB;
   background-color: #f8f9fa;
-  font-size: inherit;
   border-radius: 100px;
   border-width: 3px;
   border-color: #f8f9fa;
+  font-size: inherit;
   padding: 0.5rem 2.5rem;
 }
 

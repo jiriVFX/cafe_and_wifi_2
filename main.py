@@ -45,7 +45,10 @@ class Cafe(db.Model):
 # HTTP GET - home
 @app.route("/")
 def home():
-    return render_template("cafes.html")
+    page = request.args.get("page", default=1, type=int)
+    cafes = db.session.query(Cafe).paginate(per_page=10)
+    #user_agent = request.headers.get("User-Agent")
+    return render_template("cafes.html", cafes=cafes)
 
 
 # HTTP GET - Get random Cafe
@@ -69,13 +72,14 @@ def get_all_cafes():
 @app.route("/search")
 def search_cafes():
     location = str(request.args.get("loc"))
-    cafes = Cafe.query.filter_by(location=location).all()
+    page = request.args.get("page", default=1, type=int)
+    cafes = Cafe.query.filter_by(location=location).paginate(per_page=10)
     user_agent = request.headers.get("User-Agent")
     print(user_agent)
     if cafes:
         if user_agent:
             # If it's request coming from a browser
-            return render_template("cafes.html", cafes=[cafe.to_dict() for cafe in cafes], location=location)
+            return render_template("cafes.html", cafes=cafes, location=location)
         else:
             # If it's an API call
             return jsonify(cafes=[cafe.to_dict() for cafe in cafes])
